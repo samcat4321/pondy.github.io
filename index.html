@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pondy Postcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Gochi+Hand&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600&display=swap">
+<style>
+/* Layout: a scrapbook on French-quarter paper — postcard hero, then taped polaroids grouped by chapter, a cassette for the playlist. Single warm paper theme by choice. */
+:root{
+  --paper:#fbf3e4;        /* limewashed wall */
+  --paper-2:#f4e6cb;
+  --ink:#3a2a2a;          /* warm brown-black */
+  --ink-soft:#7a6258;
+  --ochre:#f2b544;        /* rue Romain Rolland yellow */
+  --bougain:#e2577f;      /* bougainvillea */
+  --teal:#3fb6a8;         /* hostel bunk teal */
+  --shutter:#2f8f5b;      /* shutter green */
+  --sea:#8fb9c4;
+  --white:#fffdf8;
+  --display:"Caprasimo", "Cooper Black", Georgia, serif;
+  --hand:"Gochi Hand", "Comic Sans MS", cursive;
+  --body:"Bricolage Grotesque", system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.55;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(242,181,68,.18) 0 140px, transparent 141px),
+    radial-gradient(circle at 92% 30%, rgba(226,87,127,.10) 0 180px, transparent 181px),
+    radial-gradient(rgba(58,42,42,.05) 1px, transparent 1px);
+  background-size:auto, auto, 18px 18px;
+  overflow-x:hidden;
+}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:18px;padding-block:28px 120px}
+
+/* ---------- hero postcard ---------- */
+.postcard{
+  position:relative;
+  background:var(--white);
+  border-radius:6px;
+  padding:clamp(16px,2.6vw,28px) clamp(18px,3vw,32px);
+  box-shadow:0 1px 0 rgba(0,0,0,.04), 0 18px 40px -18px rgba(58,42,42,.35);
+  transform:rotate(-1deg);
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:clamp(18px,4vw,40px);
+  border:10px solid var(--white);
+  outline:2px dashed rgba(226,87,127,.35);
+  outline-offset:-18px;
+}
+.postcard::before{ /* airmail edge */
+  content:"";position:absolute;inset:-10px -10px auto -10px;height:8px;border-radius:6px 6px 0 0;
+  background:repeating-linear-gradient(-45deg,var(--bougain) 0 14px,var(--white) 14px 22px,var(--teal) 22px 36px,var(--white) 36px 44px);
+}
+.eyebrow{font-family:var(--hand);font-size:1.25rem;color:var(--bougain);letter-spacing:.02em;margin:0}
+h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.3rem,6.5vw,4rem);
+  line-height:.95;margin:.1em 0 .15em;text-wrap:balance;color:var(--ink);
+}
+h1 .amp{color:var(--ochre);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.lede{max-width:34ch;color:var(--ink-soft);margin:0}
+.coords{font-family:var(--hand);font-size:1.05rem;color:var(--ink-soft);margin:8px 0 0}
+.back{border-left:2px dashed rgba(58,42,42,.2);padding-left:clamp(14px,3vw,28px);display:flex;flex-direction:column;gap:10px;min-width:0}
+.stamp{
+  align-self:flex-end;width:86px;aspect-ratio:4/5;max-width:100%;
+  background:var(--white);padding:7px;
+  -webkit-mask:radial-gradient(circle 5px at 5px 5px,#0000 98%,#000) -5px -5px/12px 12px;
+          mask:radial-gradient(circle 5px at 5px 5px,#0000 98%,#000) -5px -5px/12px 12px;
+  transform:rotate(6deg);filter:drop-shadow(0 2px 2px rgba(0,0,0,.15));
+}
+.stamp img{width:100%;height:100%;object-fit:cover;display:block}
+.postmark{
+  position:absolute;right:clamp(90px,14vw,150px);top:clamp(30px,5vw,50px);
+  width:96px;height:96px;border:2.5px solid rgba(47,143,91,.55);border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  font-family:var(--body);font-weight:600;font-size:.62rem;letter-spacing:.14em;color:rgba(47,143,91,.75);
+  transform:rotate(-14deg);pointer-events:none;
+}
+.lines{display:grid;gap:6px;margin-top:auto;flex:1;min-width:0}
+.lines span{display:block;border-bottom:1.5px solid rgba(58,42,42,.15);font-family:var(--hand);font-size:1.1rem;min-height:1.5em;color:var(--ink)}
+
+/* ---------- toolbar ---------- */
+.tools{
+  position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  z-index:20;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  background:var(--ink);padding:8px;border-radius:999px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);
+  max-width:calc(100vw - 32px);
+}
+.tools button{
+  font:600 .9rem var(--body);border:0;border-radius:999px;padding:9px 16px;cursor:pointer;
+  background:var(--paper);color:var(--ink);
+}
+.tools button[aria-pressed="true"]{background:var(--ochre)}
+.tools button:focus-visible,.cassette:focus-visible,.polaroid img:focus-visible{outline:3px solid var(--bougain);outline-offset:3px}
+.toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--shutter);color:var(--white);padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:21}
+
+/* ---------- chapters ---------- */
+.chapter{margin-top:clamp(56px,9vw,96px)}
+.ch-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.ch-head h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,5vw,3rem);margin:0;line-height:1;text-wrap:balance}
+.ch-head p{font-family:var(--hand);font-size:1.2rem;color:var(--ink-soft);margin:0}
+.ch-tag{font:600 .72rem var(--body);letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;color:var(--white)}
+
+.board{columns:3 250px;column-gap:26px}
+.polaroid{
+  break-inside:avoid;display:inline-block;width:100%;margin:0 0 30px;
+  background:var(--white);padding:12px 12px 6px;border-radius:3px;position:relative;
+  box-shadow:0 1px 1px rgba(0,0,0,.06),0 14px 26px -16px rgba(58,42,42,.45);
+  transform:rotate(var(--r,0deg));transition:transform .25s ease;
+}
+.polaroid:hover{transform:rotate(0deg) scale(1.02);z-index:2}
+.polaroid::before{ /* washi tape */
+  content:"";position:absolute;top:-11px;left:50%;width:84px;height:24px;transform:translateX(-50%) rotate(var(--tr,-4deg));
+  background:var(--tape,rgba(242,181,68,.7));
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px);
+  opacity:.9;
+}
+.polaroid video{display:block;width:100%;height:auto;max-width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--ink)}
+.polaroid img{display:block;width:100%;height:auto;max-width:100%;cursor:zoom-in;background:var(--paper-2)}
+.cap{
+  font-family:var(--hand);font-size:1.3rem;line-height:1.25;text-align:center;
+  padding:10px 4px 8px;min-height:2.6em;outline:none;color:var(--ink);overflow-wrap:anywhere;
+}
+.editing .cap{border-bottom:2px dashed var(--bougain);background:rgba(226,87,127,.06);cursor:text;border-radius:3px}
+.editing .cap:focus{background:rgba(242,181,68,.18)}
+.cap:empty::before{content:attr(data-hint);color:rgba(58,42,42,.35)}
+
+/* bus clip */
+.road{display:flex;align-items:center;gap:clamp(20px,5vw,56px);margin-top:clamp(40px,7vw,72px);flex-wrap:wrap}
+.road .clip{width:min(260px,70vw);margin:0}
+.road video{display:block;width:100%;height:auto;aspect-ratio:478/850;max-width:100%;background:var(--ink);object-fit:cover}
+.road-copy{flex:1 1 240px;min-width:0}
+.road-copy h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,5vw,3rem);margin:0 0 8px;line-height:1}
+.road-copy p:last-child{color:var(--ink-soft);max-width:36ch;margin:0}
+
+/* wide filmstrip for the rocks */
+.board.two{columns:2 250px;max-width:760px;margin-inline:auto}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.strip .polaroid{margin:0}
+@media (max-width:760px){.strip{grid-template-columns:1fr}}
+
+/* ---------- cassette ---------- */
+.mix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
+.cassette{
+  display:block;text-decoration:none;color:var(--ink);
+  background:var(--teal);border-radius:14px;padding:16px;aspect-ratio:1.6/1;max-width:100%;
+  position:relative;box-shadow:0 16px 30px -16px rgba(30,90,85,.7);transform:rotate(-2deg);transition:transform .25s;
+}
+a.cassette:hover{transform:rotate(0) translateY(-3px)}
+.cassette .label{
+  background:var(--paper);border-radius:6px;height:58%;padding:8px 12px;display:flex;flex-direction:column;justify-content:space-between;
+  background-image:repeating-linear-gradient(transparent 0 17px,rgba(226,87,127,.25) 17px 18px);
+}
+.cassette .label b{font-family:var(--hand);font-weight:400;font-size:clamp(1.1rem,3.4vw,1.5rem);line-height:1.1}
+.cassette .label small{font:600 .68rem var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.reels{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);width:58%;height:26%;background:rgba(0,0,0,.18);border-radius:40px;display:flex;justify-content:space-between;align-items:center;padding:0 6%}
+.reel{width:30%;aspect-ratio:1;border-radius:50%;background:var(--white);border:5px solid var(--ink);position:relative}
+.reel::after{content:"";position:absolute;inset:30%;border-radius:50%;background:var(--ink)}
+a.cassette .reel{animation:spin 3s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mix-copy h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,5vw,3rem);margin:0 0 8px;line-height:1}
+.mix-copy p{margin:0 0 10px;color:var(--ink-soft);max-width:40ch}
+.pill{display:inline-block;font:600 .9rem var(--body);background:var(--shutter);color:var(--white);padding:10px 18px;border-radius:999px;text-decoration:none}
+@media (max-width:760px){
+  .postcard{grid-template-columns:1fr}
+  .back{border-left:0;border-top:2px dashed rgba(58,42,42,.2);padding-left:0;padding-top:12px;flex-direction:row-reverse;align-items:center;gap:16px}
+  .stamp{width:64px;align-self:center}
+  .postmark{display:none}
+  .mix{grid-template-columns:1fr}
+}
+
+footer{margin-top:80px;text-align:center;font-family:var(--hand);font-size:1.3rem;color:var(--ink-soft)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(40,28,28,.88);display:grid;place-items:center;z-index:30;padding:20px;cursor:zoom-out}
+.lb figure{margin:0;max-width:min(92vw,1000px);text-align:center}
+.lb img{max-height:78vh;width:auto;max-width:100%;border:10px solid var(--white);border-bottom-width:14px}
+.lb figcaption{font-family:var(--hand);color:var(--paper);font-size:1.5rem;margin-top:10px}
+
+
+/* ---------- loader ---------- */
+.loader{position:fixed;inset:0;z-index:50;background:var(--paper);display:grid;place-items:center;padding-inline:24px;text-align:center;
+  transition:opacity .5s ease, visibility .5s;animation:loaderFailsafe .4s 12s forwards}
+.loader.done{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes loaderFailsafe{to{opacity:0;visibility:hidden}}
+.loader h2{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,7vw,2.6rem);margin:0 0 4px;line-height:1}
+.loader p{font-family:var(--hand);font-size:1.25rem;color:var(--ink-soft);margin:0}
+.road-bar{position:relative;width:min(300px,80vw);height:34px;margin:22px auto 10px}
+.road-bar::before{content:"";position:absolute;left:0;right:0;bottom:6px;border-bottom:3px dashed rgba(58,42,42,.3)}
+.bus{position:absolute;bottom:9px;left:0;width:46px;height:22px;background:var(--ochre);border:2px solid var(--ink);border-radius:7px 10px 4px 4px;
+  transform:translateX(calc(var(--p,0) * (min(300px,80vw) - 46px)));transition:transform .3s ease}
+.bus::before{content:"";position:absolute;top:3px;left:5px;right:8px;height:7px;background:repeating-linear-gradient(90deg,var(--sea) 0 8px,transparent 8px 11px)}
+.bus::after{content:"";position:absolute;bottom:-7px;left:6px;width:9px;height:9px;border-radius:50%;background:var(--ink);box-shadow:22px 0 0 var(--ink)}
+.loader .count{font:600 .8rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div>
+    <h2>Off to Pondy…</h2>
+    <p>packing the postcards</p>
+    <div class="road-bar" aria-hidden="true"><span class="bus" id="bus"></span></div>
+    <div class="count" id="loadCount">0 / 0 photos</div>
+  </div>
+</div>
+
+<div class="wrap" id="app">
+
+  <header class="postcard">
+    <div>
+      <p class="eyebrow">greetings from the French quarter ~</p>
+      <h1>Pondy <span class="amp">&amp;</span> Auroville</h1>
+      <p class="lede">Pastries for breakfast, a golden globe in the red dirt, and a whole gang waving at the Bay of Bengal.</p>
+      <p class="coords">11.93° N, 79.83° E · Puducherry</p>
+    </div>
+    <div class="back">
+      <div class="stamp"><img src="matrimandir.jpg" alt="Matrimandir stamp"></div>
+      <div class="lines">
+        <span>wish you were here (most of you were)</span>
+        <span>xo, Saumya</span>
+      </div>
+    </div>
+    <div class="postmark" aria-hidden="true">PUDUCHERRY<br>605 001<br>★ PONDY ★</div>
+  </header>
+
+  <section class="road">
+    <figure class="polaroid clip" style="--r:2deg;--tape:rgba(63,182,168,.6)">
+      <video src="bus.mp4" poster="bus-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Bus ride to Pondicherry"></video>
+      <figcaption class="cap static">the road to Pondy</figcaption>
+    </figure>
+    <div class="road-copy">
+      <p class="eyebrow">chapter 0</p>
+      <h2>Getting there</h2>
+      <p>One bus, one window seat, and the playlist already on repeat. Tap the clip for sound.</p>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-head">
+      <span class="ch-tag" style="background:var(--bougain)">Chapter 1</span>
+      <h2>Little bites</h2>
+      <p>we came for the sea, stayed for the croissants</p>
+    </div>
+    <div class="board" data-group="food"></div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-head">
+      <span class="ch-tag" style="background:var(--sea);color:var(--ink)">Chapter 2</span>
+      <h2>French quarter wanders</h2>
+      <p>pink walls, yellow walls, bougainvillea everywhere</p>
+    </div>
+    <div class="board" data-group="quarter"></div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-head">
+      <span class="ch-tag" style="background:var(--ochre);color:var(--ink)">Chapter 3</span>
+      <h2>Auroville, slowly</h2>
+      <p>red dirt, quiet trees, big thoughts</p>
+    </div>
+    <div class="board" data-group="auroville"></div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-head">
+      <span class="ch-tag" style="background:var(--teal)">Chapter 4</span>
+      <h2>Sea &amp; sunsets</h2>
+      <p>one lighthouse, eleven people, zero chill</p>
+    </div>
+    <div class="board two" data-group="sea"></div>
+    <div class="strip" data-group="rocks"></div>
+  </section>
+
+  <section class="chapter">
+    <div class="ch-head">
+      <span class="ch-tag" style="background:var(--shutter)">Chapter 5</span>
+      <h2>Us &amp; the in-between</h2>
+      <p>ruins, selfies, mirror fits, bunk beds</p>
+    </div>
+    <div class="board" data-group="us"></div>
+  </section>
+
+  <section class="chapter mix">
+    <div id="tape"></div>
+    <div class="mix-copy">
+      <h2>The trip mixtape</h2>
+      <p id="mixNote"></p>
+    </div>
+  </section>
+
+  <footer>à bientôt, Pondy ♡</footer>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<div class="lb" id="lb" hidden><figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure></div>
+
+<script>
+// Paste the Spotify playlist link here when it's ready.
+const PLAYLIST_URL = "https://open.spotify.com/playlist/3RjpdmXokI1Q5x3XYGBB5i";
+
+const PHOTOS = [
+  {id:"acai",               group:"food",      cap:"chocolate bowl, no regrets", alt:"Chocolate granola bowl with banana, goji berries and coconut"},
+  {id:"pastries-scarf",     group:"food",      cap:"bread & chocolate <3",      alt:"Strawberry danish and almond croissant beside a blue scarf"},
+  {id:"choc-croissant",     group:"food",      cap:"croissant, but make it dramatic", alt:"Chocolate-drizzled croissant on a white plate"},
+  {id:"shakshuka",          group:"food",      cap:"Shakshuka @ Bread & chocolate",       alt:"Shakshuka with microgreens and toasted sourdough"},
+  {id:"pastries-menu",      group:"food",      cap:"The strawberry one was amazing!",   alt:"Two pastries on plates over kraft-paper menus"},
+  {id:"pizza-1",            group:"food",      cap:"Tanto's",        alt:"Wood-fired pizza with basil and a bowl of penne"},
+  {id:"pizza-hat",          group:"food",      cap:"hat stays on the table",      alt:"Pizza and pasta with a pink sun hat on the chair"},
+  {id:"pizza-2",            group:"food",      cap:"same pizza, second angle",    alt:"Another view of the pizza and pasta on the terrace"},
+  {id:"japanese-cafe",      group:"food",      cap:"@ Boku Ramen", alt:"Cosy Japanese cafe counter under paper lanterns"},
+  {id:"clip-boku",          group:"food",      cap:"Boku Ramen, in motion", video:"clip-boku.mp4", alt:"Video of the counter at Boku Ramen"},
+  {id:"soba",               group:"food",      cap:"cold soba, warm hearts",      alt:"Zaru soba on a red-and-black tray with chopsticks"},
+  {id:"onigiri",            group:"food",      cap:"two tiny onigiri",            alt:"Two onigiri on nori on a white plate"},
+  {id:"pink-building",      group:"quarter",   cap:"pretty in pink",              alt:"Pink colonial building with white trim on a sunny street"},
+  {id:"le-petit-four",      group:"quarter",   cap:"bougainvillea over the door", alt:"Le Petit Four cafe entrance under pink bougainvillea"},
+  {id:"instax-yellow-wall", group:"quarter",   cap:"a polaroid of the polaroid",  alt:"Instax photo held up in front of the same yellow wall"},
+  {id:"night-lanterns",     group:"us",   cap:"Chats street after Mangrove boat ride",         alt:"Street at night with red lanterns and a lamppost"},
+  {id:"beach-crow",         group:"sea",       cap:"shoes off, crow on duty",     alt:"Crocs and sandals in the sand with a crow by the waves"},
+  {id:"promenade-arch",     group:"sea",       cap:"welcome to Eden beach!",           alt:"Crowd walking toward a curved colonnade by the sea"},
+  {id:"clip-beach",         group:"sea",       cap:"Pondy waves on repeat",       video:"clip-beach.mp4", alt:"Video of waves rolling onto the beach"},
+  {id:"matrimandir",        group:"auroville", cap:"Matrimandir",        alt:"Matrimandir's golden dome beyond red earth"},
+  {id:"clip-matrimandir",   group:"auroville", cap:"Matrimandir, the model",      video:"clip-matrimandir.mp4", alt:"Video of the Matrimandir model"},
+  {id:"auroville-brochure", group:"auroville", cap:"officially Aurovillians (for a day)", alt:"Hand holding an Auroville brochure"},
+  {id:"periwinkle",         group:"auroville", cap:"signs from the universe",     alt:"Stone marker painted with Madagascar periwinkle flowers in a forest"},
+  {id:"karma-yoga",         group:"auroville", cap:"action, not fruits (but also fruit)", alt:"Karma Yoga mural of Krishna and Arjuna"},
+  {id:"rocks-1",            group:"rocks",     cap:"waiting for the sun to clock out", alt:"Friends sitting on rocks facing the sea and a lighthouse"},
+  {id:"rocks-2",            group:"rocks",     cap:"bye bye sun!",                alt:"Friends on the rocks waving at the sea"},
+  {id:"rocks-3",            group:"rocks",     cap:"one more, everyone wave",     alt:"Another shot of the group waving at the sea"},
+  {id:"ruins-duo",          group:"us",        cap:"posing with history",         alt:"Two friends in front of old brick ruins with arches"},
+  {id:"instax",             group:"us",        cap:"the photographer, photographed", alt:"Friend taking a photo with a lilac Instax camera on a boat"},
+  {id:"selfie",             group:"us",        cap:"lunch date with the sweetest couple",                  alt:"Selfie of two friends at a cafe"},
+  {id:"clip-cat",           group:"us",        cap:"cat cameo",                   video:"clip-cat.mp4", alt:"Video of a black-and-white cat"},
+  {id:"mirror-selfie",      group:"us",        cap:"outfit check ✓",              alt:"Mirror selfie in a red top and wide jeans"},
+  {id:"bunks",              group:"us",        cap:"Bottom bunk is mine",            alt:"Teal bunk beds with fairy-light curtains"},
+  {id:"green-window",       group:"us",   cap:"Zostel",        alt:"Green shutter against leafy window"}
+];
+
+const TAPES=["rgba(242,181,68,.75)","rgba(226,87,127,.55)","rgba(63,182,168,.6)","rgba(143,185,196,.75)"];
+function capOf(p){return p.cap}
+
+PHOTOS.forEach((p,i)=>{
+  const host=document.querySelector(`[data-group="${p.group}"]`);
+  const fig=document.createElement("figure");
+  fig.className="polaroid";
+  const rot=[-2.5,1.8,-1.2,2.6,-0.6,1.1][i%6];
+  fig.style.setProperty("--r",rot+"deg");
+  fig.style.setProperty("--tr",(i%2?5:-4)+"deg");
+  fig.style.setProperty("--tape",TAPES[i%TAPES.length]);
+  const media=p.video
+    ? `<video src="${p.video}" poster="${p.id}.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="${p.alt}"></video>`
+    : `<img src="${p.id}.jpg" alt="${p.alt}" tabindex="0">`;
+  fig.innerHTML=`${media}<figcaption class="cap"></figcaption>`;
+  fig.querySelector(".cap").textContent=capOf(p);
+  host.appendChild(fig);
+});
+
+// ----- lightbox -----
+const lb=document.getElementById("lb");
+const lbFigure=lb.querySelector("figure").innerHTML;
+function openLb(img){
+  lb.querySelector("figure").innerHTML=lbFigure;
+  lb.querySelector("img").src=img.src; lb.querySelector("img").alt=img.alt;
+  lb.querySelector("figcaption").textContent=img.parentElement.querySelector(".cap").textContent;
+  lb.hidden=false;
+}
+document.addEventListener("click",e=>{
+  if(e.target.matches(".polaroid img")) openLb(e.target);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&e.target.matches(".polaroid img")) openLb(e.target);
+  if(e.key==="Escape") lb.hidden=true;
+});
+lb.addEventListener("click",()=>lb.hidden=true);
+
+// ----- mixtape -----
+const tape=document.getElementById("tape"), note=document.getElementById("mixNote");
+const tapeInner=`<div class="label"><b>Pondy Side A ♡</b><small>${PLAYLIST_URL?"tap to play on Spotify":"mixtape loading…"}</small></div><div class="reels"><span class="reel"></span><span class="reel"></span></div>`;
+if(PLAYLIST_URL){
+  tape.innerHTML=`<a class="cassette" href="${PLAYLIST_URL}" target="_blank" rel="noopener" aria-label="Open the trip playlist on Spotify">${tapeInner}</a>`;
+  note.innerHTML=`The songs from the car, the rocks and the café. <br><a class="pill" href="${PLAYLIST_URL}" target="_blank" rel="noopener">Play on Spotify ↗</a>`;
+}else{
+  tape.innerHTML=`<div class="cassette">${tapeInner}</div>`;
+  note.textContent="The songs from the car, the rocks and the café. Playlist link coming soon.";
+}
+
+// ----- toast -----
+let tt;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2200)}
+
+// ----- loader: wait for every photo (max 10s) -----
+(function(){
+  const loader=document.getElementById("loader"), bus=document.getElementById("bus"), count=document.getElementById("loadCount");
+  const imgs=[...document.querySelectorAll("#app img")];
+  const total=imgs.length; let done=0, finished=false;
+  function update(){count.textContent=`${done} / ${total} photos`;bus.style.setProperty("--p",total?done/total:1)}
+  function finish(){if(finished)return;finished=true;loader.classList.add("done");setTimeout(()=>loader.hidden=true,600)}
+  function tick(){done++;update();if(done>=total)setTimeout(finish,250)}
+  update();
+  imgs.forEach(img=>{
+    if(img.complete){tick()}else{img.addEventListener("load",tick,{once:true});img.addEventListener("error",tick,{once:true})}
+  });
+  if(!total)finish();
+  setTimeout(finish,10000);
+})();
+</script>
+
+</body>
+</html>
